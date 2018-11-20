@@ -5,6 +5,7 @@ const port = process.env.PORT || 3800;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+//MODELS
 const users = require('./src/routes/user.routes');
 
 app.use(bodyParser.json());
@@ -16,6 +17,7 @@ mongoose
   .then( () => console.log(`MongoDB is connected...`) )
   .catch( error => console.log(error) );
 
+//ROUTES
 app.use('/api/users', users);
 
 app.listen(port, () => {
