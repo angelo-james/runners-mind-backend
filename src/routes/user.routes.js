@@ -27,4 +27,16 @@ router.delete('/:id', (req, res) => {
     .catch(error => res.status(404).json({ message: 'Failed to delete user.' }))
 });
 
+router.put('/:id', (req, res) => {
+  let { username, password, email } = req.body;
+  const userId = req.params.id
+  const payload = {
+    username: username,
+    password: password,
+    email: email
+  }
+  Users.findOneAndUpdate(userId, payload)
+    .then(() => res.status(200).json({ message: 'Successfully updated user' }))
+})
+
 module.exports = router;
