@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   let { username, password, email } = req.body;
   const newUser = new Users({
-    name: username,
+    username: username,
     password: password,
     email: email
   })
@@ -22,9 +22,9 @@ router.post('/', (req, res) => {
 router.delete('/:id', (req, res) => {
   const userId = req.params.id
 
-  Users.findById(userId)
-    .then(item => item.remove().then(() => res.status(200).json({ message: 'Successfuly deleted user account.' })))
-    .catch(error => res.status(404).json({ message: 'Failed to delete user.' }))
+  Users.findById({_id: userId})
+    .then(user => user.remove().then(() => res.status(200).json({ data: user, message: 'Successfuly deleted user account.' })))
+    .catch(error => res.status(404).json({ error, message: 'Failed to delete user.' }))
 });
 
 router.put('/:id', (req, res) => {
@@ -35,8 +35,13 @@ router.put('/:id', (req, res) => {
     password: password,
     email: email
   }
-  Users.findOneAndUpdate(userId, payload)
-    .then(() => res.status(200).json({ message: 'Successfully updated user' }))
+  Users.findByIdAndUpdate({_id: userId}, payload).then(() => {
+    Users.findOne({_id: userId}).then(user => {
+      res.status(200).json({ data: user, message: 'Successfully updated user info' })
+    })
+    .catch(error => res.status(404).json(error))
+  })
+    
 })
 
 module.exports = router;
