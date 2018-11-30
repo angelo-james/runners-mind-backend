@@ -13,7 +13,9 @@ const UsersSchema = new Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  followers: [],
+  following: []
 });
 
 module.exports = Users = mongoose.model('users', UsersSchema);
