@@ -5,11 +5,16 @@ const port = process.env.PORT || 3800;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+const cors = require('cors');
+const morgan = require('morgan');
+
 //MODELS
 const users = require('./src/routes/user.routes');
 const posts = require('./src/routes/post.routes');
 
 app.use(bodyParser.json());
+app.use(cors());
+app.use(morgan('dev'));
 
 const db = require('./config/keys').mongoURI;
 
