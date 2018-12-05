@@ -27,8 +27,16 @@ const createUser = (userInfo) => {
     })
 }
 
+const deleteUser = (id) => {
+  return Users.findById({ _id: id })
+  .then(user => {
+    return !user ? {status: 404, error: 'user not found'} : user.remove() 
+    })
+}
+
 module.exports = {
   getUsers,
   getUser,
-  createUser
+  createUser,
+  deleteUser
 }

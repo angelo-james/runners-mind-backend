@@ -30,8 +30,17 @@ const createUser = (userInfo) => {
   })
 }
 
+const deleteUser = (id) => {
+  user = userQuery.deleteUser(id);
+  
+  return user.then(result => {
+    return result
+  })
+}
+
 module.exports = {
   getUsers,
   getUser,
-  createUser
+  createUser,
+  deleteUser
 }
