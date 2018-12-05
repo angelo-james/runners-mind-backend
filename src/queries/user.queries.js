@@ -34,9 +34,22 @@ const deleteUser = (id) => {
     })
 }
 
+const updateUser = (userInfo, id) => {
+  let { username, password, email } = userInfo;
+  
+  return Users.findByIdAndUpdate({_id: id}, userInfo)
+    .then(() => {
+      return Users.findOne({_id: id})
+        .then(user => {
+          return user;
+        })
+    })
+}
+
 module.exports = {
   getUsers,
   getUser,
   createUser,
-  deleteUser
+  deleteUser,
+  updateUser
 }

@@ -49,9 +49,23 @@ const deleteUser = (req, res, next) => {
   })  
 }
 
+const updateUser = (req, res, next) => {
+  let { body } = req;
+  let { id } = req.params;
+  let promise = model.updateUser(body, id);
+
+  promise.then(result => {
+    return result.error ? next(result) : res.status(200).json({result, message: 'updated a user'})
+  })
+  promise.catch(error => {
+    next(error)
+  })
+}
+
 module.exports = {
   getUsers,
   getUser,
   createUser,
-  deleteUser
+  deleteUser,
+  updateUser
 }

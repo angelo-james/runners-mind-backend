@@ -38,9 +38,20 @@ const deleteUser = (id) => {
   })
 }
 
+const updateUser = (userInfo, id) => {
+  user = userQuery.updateUser(userInfo, id)
+
+  return user.then(result => {
+      return !result
+      ? { error: 'error updating user', status: 404 }
+      : result
+  })
+}
+
 module.exports = {
   getUsers,
   getUser,
   createUser,
-  deleteUser
+  deleteUser,
+  updateUser
 }
