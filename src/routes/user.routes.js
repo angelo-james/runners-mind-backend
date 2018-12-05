@@ -4,5 +4,6 @@ const ctrl = require('../controllers/user.controllers');
 
 router.get('/', ctrl.getUsers);
 router.get('/:id', ctrl.getUser);
+router.post('/', ctrl.createUser);
 
 module.exports = router;
