@@ -1,21 +1,28 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const userQuery = require('../queries/user.queries');
 
-const UsersSchema = new Schema({
-  username: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  followers: [],
-  following: []
-});
+const getUsers = () => {
+  users = userQuery.getUsers();
 
-module.exports = Users = mongoose.model('users', UsersSchema);
+  return users.then(result => {
+    
+    return result.length < 1 ?
+      {error: 'error message', status:404} :
+      result
+  })
+}
+
+const getUser = (id) => {
+  user = userQuery.getUser(id);
+
+  return user.then(result => {
+    
+    return result.length < 1 ?
+      {error: 'error message', status:404} :
+      result
+  })
+}
+
+module.exports = {
+  getUsers,
+  getUser
+}
