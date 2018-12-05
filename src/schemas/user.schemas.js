@@ -14,11 +14,11 @@ const UsersSchema = new Schema({
     type: String,
     required: true
   },
+  token: [],
   followers: [],
   following: [],
-  token: '',
-  date: { type: Date, default: Date.now },
-  post: []
+  post: [],
+  date: { type: Date, default: Date.now }
 });
 
 module.exports = Users = mongoose.model('users', UsersSchema);
