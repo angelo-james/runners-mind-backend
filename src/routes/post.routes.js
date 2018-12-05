@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Posts = require('../models/post.models');
+const Posts = require('../schemas/post.schemas');
 
 router.get('/', (req, res) => {
   Posts.find()
