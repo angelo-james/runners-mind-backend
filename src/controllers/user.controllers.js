@@ -36,8 +36,22 @@ const createUser = (req, res, next) => {
   })
 }
 
+const deleteUser = (req, res, next) => {
+  let { id } = req.params;
+
+  let promise = model.deleteUser(id)
+
+  promise.then(result => {
+    return result.error ? next(result) : res.status(200).json(result)
+  })
+  promise.catch(error => {
+    next(error)
+  })  
+}
+
 module.exports = {
   getUsers,
   getUser,
-  createUser
+  createUser,
+  deleteUser
 }
