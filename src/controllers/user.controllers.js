@@ -24,7 +24,20 @@ const getUser = (req, res, next) => {
   })  
 }
 
+const createUser = (req, res, next) => {
+  let { body } = req;
+  let promise = model.createUser(body);
+
+  promise.then(result => {
+    return result.error ? next(result) : res.status(200).json({result, message: 'created a user'})
+  })
+  promise.catch(error => {
+    next(error)
+  })
+}
+
 module.exports = {
   getUsers,
-  getUser
+  getUser,
+  createUser
 }
