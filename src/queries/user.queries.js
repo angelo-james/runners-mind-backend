@@ -14,7 +14,21 @@ const getUser = (id) => {
     })
 }
 
+const createUser = (userInfo) => {
+  let { username, password, email } = userInfo;
+  const newUser = new Users({
+    username: username,
+    password: password,
+    email: email
+  })
+  return newUser.save()
+    .then(users => {
+      return users
+    })
+}
+
 module.exports = {
   getUsers,
-  getUser
+  getUser,
+  createUser
 }
