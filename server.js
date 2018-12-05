@@ -13,7 +13,9 @@ const users = require('./src/routes/user.routes');
 const posts = require('./src/routes/post.routes');
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+  exposedHeaders: ['authorization']
+}));
 app.use(morgan('dev'));
 
 const db = require('./config/keys').mongoURI;
@@ -26,6 +28,18 @@ mongoose
 //ROUTES
 app.use('/api/users', users);
 app.use('/api/posts', posts);
+
+//=================================================================
+//Changed code
+//=================================================================
+
+app.all('*', (req, res, next) => res.sendStatus(404))
+
+app.use((err, req, res, next) => {
+  res.status(err.status).json(err)
+})
+
+//=================================================================
 
 app.listen(port, () => {
   console.log(`You're listening on port ${port}...`);
