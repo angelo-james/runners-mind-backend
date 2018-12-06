@@ -4,8 +4,10 @@ const Schema = mongoose.Schema;
 const CommentsSchema = new Schema({
   date: { type: Date, default: Date.now },
   user_id: [],
-  body: {
-    type: String
+  post_id: [],
+  comment: {
+    type: String,
+    required: true
   }
 })
 

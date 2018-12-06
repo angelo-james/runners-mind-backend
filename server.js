@@ -11,6 +11,7 @@ const morgan = require('morgan');
 //MODELS
 const users = require('./src/routes/user.routes');
 const posts = require('./src/routes/post.routes');
+const comments = require('./src/routes/comment.routes');
 
 app.use(bodyParser.json());
 app.use(cors({
@@ -28,6 +29,7 @@ mongoose
 //ROUTES
 app.use('/api/users', users);
 app.use('/api/posts', posts);
+app.use('/api/comment', comments);
 
 //=================================================================
 //Changed code
