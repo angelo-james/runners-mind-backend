@@ -18,7 +18,18 @@ const deletePost = (postId) => {
   })
 }
 
+const updatePost = (postInfo, id) => {
+  let post = postQuery.updatePost(postInfo, id)
+
+  return post.then(result => {
+      return !result
+      ? { error: 'error updating post', status: 404 }
+      : result
+  })
+}
+
 module.exports = {
   createPost,
-  deletePost
+  deletePost,
+  updatePost
 }

@@ -36,7 +36,20 @@ const deletePost = (postId) => {
     })
 }
 
+const updatePost = (postInfo, id) => {
+  let { post, title } = postInfo;
+  
+  return Posts.findByIdAndUpdate({_id: id}, postInfo)
+    .then(() => {
+      return Posts.findOne({_id: id})
+        .then(post => {
+          return post;
+        })
+    })
+}
+
 module.exports = {
   createPost,
-  deletePost
+  deletePost,
+  updatePost
 }
