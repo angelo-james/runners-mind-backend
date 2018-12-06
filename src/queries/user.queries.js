@@ -46,10 +46,25 @@ const updateUser = (userInfo, id) => {
     })
 }
 
+const validateUser = (payload) => {
+  let { email, password } = payload;
+  
+  return Users.find({email: email})
+    .then(user => {
+      if (user[0].password == password) {
+        return user
+      } else {
+        return {error: 'username or password is invalid'}
+      }
+    })
+
+}
+
 module.exports = {
   getUsers,
   getUser,
   createUser,
   deleteUser,
-  updateUser
+  updateUser,
+  validateUser
 }

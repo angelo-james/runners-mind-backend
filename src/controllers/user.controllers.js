@@ -1,4 +1,5 @@
 const model = require('../models/user.models');
+const jwt = require('jsonwebtoken');
 
 const getUsers = (req, res, next) => {
   let promise = model.getUsers();
@@ -62,10 +63,26 @@ const updateUser = (req, res, next) => {
   })
 }
 
+const validateUser = async (req, res, next) => {
+  let { body } = req;
+  let promise = await model.validateUser(body);
+
+  if (promise.error) {
+    return res.status(403).json({message: 'username or email invalid'})
+  } else {
+    let token = jwt.sign({
+      id: promise[0]._id
+    }, 'secretkey', { expiresIn: '24h' })
+
+    return res.status(200).set({authorization: token}).json(promise[0])
+  }
+}
+
 module.exports = {
   getUsers,
   getUser,
   createUser,
   deleteUser,
-  updateUser
+  updateUser,
+  validateUser
 }
