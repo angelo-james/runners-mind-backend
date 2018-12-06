@@ -20,6 +20,23 @@ const createComment = (commentInfo) => {
   })
 }
 
+const deleteComment = (commentId) => {
+  return Comments.findById({ _id: commentId })
+  .then(comment => {
+    return !comment ? {status: 404, error: 'comment not found'} : 
+      comment.remove()
+        .then(comment => {
+          Posts.findById({_id: comment.post_id})
+            .then(post => {
+              post.comment.pull(comment._id)
+              post.save()
+            })
+          return comment
+        })
+    })
+}
+
 module.exports = {
-  createComment
+  createComment,
+  deleteComment
 }

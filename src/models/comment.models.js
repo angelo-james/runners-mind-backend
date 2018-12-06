@@ -10,6 +10,15 @@ const createComment = (commentInfo) => {
   })
 }
 
+const deleteComment = (commentId) => {
+  let comment = commentQuery.deleteComment(commentId);
+  
+  return comment.then(result => {
+    return result
+  })
+}
+
 module.exports = {
-  createComment
+  createComment,
+  deleteComment
 }

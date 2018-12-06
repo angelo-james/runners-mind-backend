@@ -13,6 +13,20 @@ const createComment = (req, res, next) => {
   })
 }
 
+const deleteComment = (req, res, next) => {
+  let { id } = req.params;
+
+  let promise = model.deleteComment(id);
+
+  promise.then(result => {
+    return result.error ? next(result) : res.status(200).json(result)
+  })
+  promise.catch(error => {
+    next(error)
+  })
+}
+
 module.exports = {
-  createComment
+  createComment,
+  deleteComment
 }

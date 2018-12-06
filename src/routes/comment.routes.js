@@ -3,5 +3,6 @@ const router = express.Router();
 const ctrl = require('../controllers/comment.controllers');
 
 router.post('/', ctrl.createComment);
+router.delete('/:id', ctrl.deleteComment);
 
 module.exports = router;
