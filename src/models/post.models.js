@@ -1,7 +1,7 @@
 const postQuery = require('../queries/post.queries');
 
 const createPost = (postInfo) => {
-  post = postQuery.createPost(postInfo)
+  let post = postQuery.createPost(postInfo)
 
   return post.then(result => {
       return !result

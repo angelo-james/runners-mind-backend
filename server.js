@@ -29,7 +29,7 @@ mongoose
 //ROUTES
 app.use('/api/users', users);
 app.use('/api/posts', posts);
-app.use('/api/comment', comments);
+app.use('/api/comments', comments);
 
 //=================================================================
 //Changed code
