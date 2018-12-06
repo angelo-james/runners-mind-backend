@@ -48,8 +48,16 @@ const updateComment = (commentInfo, commentId) => {
     })
 }
 
+const getComments = (postId) => {
+  return Comments.find({post_id: postId.post_id})
+  .then(comments => {
+    return comments
+  }) 
+}
+
 module.exports = {
   createComment,
   deleteComment,
-  updateComment
+  updateComment,
+  getComments
 }

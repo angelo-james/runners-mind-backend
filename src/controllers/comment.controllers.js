@@ -39,8 +39,22 @@ const updateComment = (req, res, next) => {
   })
 }
 
+const getComments = (req, res, next) => {
+  let { body } = req;
+  
+  let promise = model.getComments(body);
+
+  promise.then(result => {
+    return result.error ? next(result) : res.status(200).json(result)
+  })
+  promise.catch(error => {
+    next(error)
+  })
+}
+
 module.exports = {
   createComment,
   deleteComment,
-  updateComment
+  updateComment,
+  getComments
 }

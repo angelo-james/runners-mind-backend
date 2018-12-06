@@ -28,8 +28,19 @@ const updateComment = (commentInfo, commentId) => {
   })
 }
 
+const getComments = (postId) => {
+  let comments = commentQuery.getComments(postId);
+
+  return comments.then(result => {
+    return result.length < 1 ?
+      {error: 'error message', status:404} :
+      result
+  })
+}
+
 module.exports = {
   createComment,
   deleteComment,
-  updateComment
+  updateComment,
+  getComments
 }
