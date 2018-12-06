@@ -1,4 +1,5 @@
 const Posts = require('../schemas/post.schemas');
+const Users = require('../schemas/user.schemas');
 
 const createPost = (postInfo) => {
   let { title, post, userId } = postInfo;
@@ -7,10 +8,17 @@ const createPost = (postInfo) => {
     post: post,
     user_id: userId
   })
+
   return newPost.save()
-    .then(posts => {
-      return posts
-    })
+  .then(post => {
+    Users.findById({_id: post.user_id})
+      .then(user => {
+        console.log(user)
+        user.post.push(post._id)
+        user.save()
+      })
+    return post
+  })
 }
 
 module.exports = {
