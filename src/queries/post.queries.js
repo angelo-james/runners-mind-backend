@@ -13,7 +13,6 @@ const createPost = (postInfo) => {
   .then(post => {
     Users.findById({_id: post.user_id})
       .then(user => {
-        console.log(user)
         user.post.push(post._id)
         user.save()
       })
@@ -21,6 +20,23 @@ const createPost = (postInfo) => {
   })
 }
 
+const deletePost = (postId) => {
+  return Posts.findById({ _id: postId })
+  .then(post => {
+    return !post ? {status: 404, error: 'post not found'} : 
+      post.remove()
+        .then(post => {
+          Users.findById({_id: post.user_id})
+            .then(user => {
+              user.post.pull(post._id)
+              user.save()
+            })
+          return post
+        })
+    })
+}
+
 module.exports = {
-  createPost
+  createPost,
+  deletePost
 }
