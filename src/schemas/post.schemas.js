@@ -6,9 +6,7 @@ const PostsSchema = new Schema({
     type: String,
     required: true
   },
-  likes: {
-    type: Number
-  },
+  likes: [],
   title: {
     type: String,
     required: true
