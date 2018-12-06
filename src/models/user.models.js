@@ -1,7 +1,7 @@
 const userQuery = require('../queries/user.queries');
 
 const getUsers = () => {
-  users = userQuery.getUsers();
+ let users = userQuery.getUsers();
 
   return users.then(result => {
     return result.length < 1 ?
@@ -11,7 +11,7 @@ const getUsers = () => {
 }
 
 const getUser = (id) => {
-  user = userQuery.getUser(id);
+ let user = userQuery.getUser(id);
 
   return user.then(result => {
     return result === null ?
@@ -21,7 +21,7 @@ const getUser = (id) => {
 }
 
 const createUser = (userInfo) => {
-  user = userQuery.createUser(userInfo)
+  let user = userQuery.createUser(userInfo)
 
   return user.then(result => {
       return !result
@@ -31,7 +31,7 @@ const createUser = (userInfo) => {
 }
 
 const deleteUser = (id) => {
-  user = userQuery.deleteUser(id);
+  let user = userQuery.deleteUser(id);
   
   return user.then(result => {
     return result
@@ -39,7 +39,7 @@ const deleteUser = (id) => {
 }
 
 const updateUser = (userInfo, id) => {
-  user = userQuery.updateUser(userInfo, id)
+  let user = userQuery.updateUser(userInfo, id)
 
   return user.then(result => {
       return !result

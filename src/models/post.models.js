@@ -28,8 +28,19 @@ const updatePost = (postInfo, id) => {
   })
 }
 
+const getPosts = (userId) => {
+  let posts = postQuery.getPosts(userId);
+
+  return posts.then(result => {
+    return result.length < 1 ?
+      {error: 'error message', status:404} :
+      result
+  })
+}
+
 module.exports = {
   createPost,
   deletePost,
-  updatePost
+  updatePost,
+  getPosts
 }

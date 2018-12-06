@@ -39,8 +39,22 @@ const updatePost = (req, res, next) => {
   })
 }
 
+const getPosts = (req, res, next) => {
+  let { body } = req;
+  
+  let promise = model.getPosts(body);
+
+  promise.then(result => {
+    return result.error ? next(result) : res.status(200).json(result)
+  })
+  promise.catch(error => {
+    next(error)
+  })
+}
+
 module.exports = {
   createPost,
   deletePost,
-  updatePost
+  updatePost,
+  getPosts
 }

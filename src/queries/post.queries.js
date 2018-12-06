@@ -48,8 +48,16 @@ const updatePost = (postInfo, id) => {
     })
 }
 
+const getPosts = (userId) => {
+  return Posts.find({user_id: userId.user_id})
+  .then(posts => {
+    return posts
+  }) 
+}
+
 module.exports = {
   createPost,
   deletePost,
-  updatePost
+  updatePost,
+  getPosts
 }
