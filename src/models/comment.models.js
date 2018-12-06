@@ -18,7 +18,18 @@ const deleteComment = (commentId) => {
   })
 }
 
+const updateComment = (commentInfo, commentId) => {
+  let comment = commentQuery.updateComment(commentInfo, commentId)
+
+  return comment.then(result => {
+      return !result
+      ? { error: 'error updating comment', status: 404 }
+      : result
+  })
+}
+
 module.exports = {
   createComment,
-  deleteComment
+  deleteComment,
+  updateComment
 }

@@ -26,7 +26,21 @@ const deleteComment = (req, res, next) => {
   })
 }
 
+const updateComment = (req, res, next) => {
+  let { body } = req;
+  let { id } = req.params;
+  let promise = model.updateComment(body, id);
+
+  promise.then(result => {
+    return result.error ? next(result) : res.status(200).json({result, message: 'updated a comment'})
+  })
+  promise.catch(error => {
+    next(error)
+  })
+}
+
 module.exports = {
   createComment,
-  deleteComment
+  deleteComment,
+  updateComment
 }

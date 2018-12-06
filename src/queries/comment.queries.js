@@ -36,7 +36,20 @@ const deleteComment = (commentId) => {
     })
 }
 
+const updateComment = (commentInfo, commentId) => {
+  let { comment } = commentInfo;
+  
+  return Comments.findByIdAndUpdate({_id: commentId}, commentInfo)
+    .then(() => {
+      return Comments.findOne({_id: commentId})
+        .then(comment => {
+          return comment;
+        })
+    })
+}
+
 module.exports = {
   createComment,
-  deleteComment
+  deleteComment,
+  updateComment
 }
