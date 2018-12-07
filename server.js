@@ -19,7 +19,7 @@ app.use(cors({
 }));
 app.use(morgan('dev'));
 
-const db = require('./config/keys').mongoURI;
+const db = process.env.mongoURI || require('./config/keys').mongoURI;
 
 mongoose
   .connect(db, { useNewUrlParser: true })
