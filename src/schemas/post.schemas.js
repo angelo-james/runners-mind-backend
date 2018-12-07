@@ -16,7 +16,10 @@ const PostsSchema = new Schema({
     type: String,
     required: true
   },
-  comment: []
+  comment: [{
+    type: Schema.Types.ObjectId,
+    ref: 'comments'
+  }]
 });
 
 module.exports = Posts = mongoose.model('posts', PostsSchema);
