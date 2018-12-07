@@ -71,10 +71,10 @@ const validateUser = async (req, res, next) => {
     return res.status(403).json({message: 'username or email invalid'})
   } else {
     let token = jwt.sign({
-      id: promise[0]._id
+      id: promise._id
     }, 'secretkey', { expiresIn: '24h' })
 
-    return res.status(200).set({authorization: token}).json(promise[0])
+    return res.status(200).set({authorization: token}).json(promise)
   }
 }
 
