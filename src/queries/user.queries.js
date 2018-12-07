@@ -9,6 +9,10 @@ const getUsers = () => {
 
 const getUser = (id) => {
   return Users.findById({ _id: id })
+    .populate({
+      path: 'post',
+      populate: {path: 'comment'}
+    })
     .then(user => {
       return user
     })
@@ -46,18 +50,20 @@ const updateUser = (userInfo, id) => {
     })
 }
 
-const validateUser = (payload) => {
+const validateUser = async (payload) => {
   let { email, password } = payload;
-  
-  return Users.find({email: email})
-    .then(user => {
-      if (user[0].password == password) {
-        return user
-      } else {
-        return {error: 'username or password is invalid'}
-      }
-    })
 
+  return await Users.findOne({email: email})
+    .populate({
+      path: 'post',
+      populate: {path: 'comment'}
+    })
+    .then(user => {
+      if (user && user.password == password) {
+        return user;
+      }
+      return {error: 'user or password is invalid'}
+    })
 }
 
 module.exports = {
