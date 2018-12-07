@@ -50,7 +50,7 @@ const updateUser = (userInfo, id) => {
 
 const validateUser = async (payload) => {
   let userData = await userQuery.validateUser(payload);
-
+  
   return userData;
 }
 
