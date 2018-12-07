@@ -17,7 +17,10 @@ const UsersSchema = new Schema({
   token: [],
   followers: [],
   following: [],
-  post: [],
+  post: [{
+    type: Schema.Types.ObjectId,
+    ref: 'posts'
+  }],
   date: { type: Date, default: Date.now }
 });
 
