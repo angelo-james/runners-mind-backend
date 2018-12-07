@@ -19,7 +19,9 @@ app.use(cors({
 }));
 app.use(morgan('dev'));
 
-const db = process.env.mongoURI || require('./config/keys').mongoURI;
+const mlabKeys = require('./config/keys');
+
+const db = process.env.mlabKeys.mongoURI || mlabKeys.mongoURI;
 
 mongoose
   .connect(db, { useNewUrlParser: true })
