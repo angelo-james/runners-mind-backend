@@ -18,11 +18,11 @@ const getUser = (id) => {
     })
 }
 
-const createUser = (userInfo) => {
+const createUser = (userInfo, hashPassword) => {
   let { username, password, email } = userInfo;
   const newUser = new Users({
     username: username,
-    password: password,
+    password: hashPassword,
     email: email
   })
   return newUser.save()
