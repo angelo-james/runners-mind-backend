@@ -1,5 +1,6 @@
 const model = require('../models/user.models');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 const getUsers = (req, res, next) => {
   let promise = model.getUsers();
@@ -27,7 +28,8 @@ const getUser = (req, res, next) => {
 
 const createUser = (req, res, next) => {
   let { body } = req;
-  let promise = model.createUser(body);
+  let hashPassword = bcrypt.hashSync(body.password);
+  let promise = model.createUser(body, hashPassword);
 
   promise.then(result => {
     return result.error ? next(result) : res.status(200).json({result, message: 'created a user'})
@@ -72,10 +74,14 @@ const validateUser = async (req, res, next) => {
   } else {
     let token = jwt.sign({
       id: promise._id
-    }, 'secretkey', { expiresIn: '24h' })
+    }, 'secretkey', { expiresIn: '1hr' })
 
     return res.status(200).set({authorization: token}).json(promise)
   }
+}
+
+const followUser = () => {
+  
 }
 
 module.exports = {
@@ -84,5 +90,6 @@ module.exports = {
   createUser,
   deleteUser,
   updateUser,
-  validateUser
+  validateUser,
+  followUser
 }
