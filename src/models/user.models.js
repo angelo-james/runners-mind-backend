@@ -20,8 +20,8 @@ const getUser = (id) => {
   })
 }
 
-const createUser = (userInfo) => {
-  let user = userQuery.createUser(userInfo)
+const createUser = (userInfo, hashPassword) => {
+  let user = userQuery.createUser(userInfo, hashPassword)
 
   return user.then(result => {
       return !result
