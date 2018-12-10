@@ -80,8 +80,16 @@ const validateUser = async (req, res, next) => {
   }
 }
 
-const followUser = () => {
-  
+const addFollower = (req, res, next) => {
+  let { body } = req;
+  let promise = model.addFollower(body);
+
+  promise.then(result => {
+    return result.error ? next(result) : res.status(200).json({result, message: 'updated a user'})
+  })
+  promise.catch(error => {
+    next(error)
+  })
 }
 
 module.exports = {
@@ -91,5 +99,5 @@ module.exports = {
   deleteUser,
   updateUser,
   validateUser,
-  followUser
+  addFollower
 }

@@ -66,11 +66,23 @@ const validateUser = async (payload) => {
     })
 }
 
+const addFollower = (userInfo) => {
+  let { username, followedBy } = userInfo;
+  console.log(followedBy)
+  return Users.find({username: username})
+    .then(user => {
+     user[0].followers.push(followedBy)
+     user[0].save()
+     return user
+    })
+}
+
 module.exports = {
   getUsers,
   getUser,
   createUser,
   deleteUser,
   updateUser,
-  validateUser
+  validateUser,
+  addFollower
 }

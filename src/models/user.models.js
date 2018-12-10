@@ -54,11 +54,22 @@ const validateUser = async (payload) => {
   return userData;
 }
 
+const addFollower = (userInfo) => {
+  let user = userQuery.addFollower(userInfo)
+
+  return user.then(result => {
+      return !result
+      ? { error: 'error updating user', status: 404 }
+      : result
+  })
+}
+
 module.exports = {
   getUsers,
   getUser,
   createUser,
   deleteUser,
   updateUser,
-  validateUser
+  validateUser,
+  addFollower
 }

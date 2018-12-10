@@ -8,5 +8,6 @@ router.post('/', ctrl.createUser);
 router.delete('/:id', ctrl.deleteUser);
 router.put('/:id', ctrl.updateUser);
 router.post('/login', ctrl.validateUser);
+router.put('/', ctrl.addFollower);
 
 module.exports = router;
