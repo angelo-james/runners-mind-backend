@@ -14,9 +14,9 @@ const createComment = (req, res, next) => {
 }
 
 const deleteComment = (req, res, next) => {
-  let { id } = req.params;
+  let { body } = req;
 
-  let promise = model.deleteComment(id);
+  let promise = model.deleteComment(body);
 
   promise.then(result => {
     return result.error ? next(result) : res.status(200).json(result)

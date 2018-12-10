@@ -10,8 +10,8 @@ const createComment = (commentInfo) => {
   })
 }
 
-const deleteComment = (commentId) => {
-  let comment = commentQuery.deleteComment(commentId);
+const deleteComment = (username) => {
+  let comment = commentQuery.deleteComment(username);
   
   return comment.then(result => {
     return result
